@@ -93,7 +93,7 @@ rdeck_layer_dropdown <- function(rdeck, layer_names, layer_group_names) {
   selected_groups <-
     if (!is.null(rdeck_layer_group_names)) {
       tidyselect::eval_select(
-        enquo(layer_group_names),
+        rlang::enquo(layer_group_names),
         data = rdeck_layer_group_names,
         allow_rename = FALSE
       )
@@ -104,7 +104,7 @@ rdeck_layer_dropdown <- function(rdeck, layer_names, layer_group_names) {
   control_data <-
     list(
       layerNames = as.character(unname(rdeck_layer_names[selected_layers])),
-      layerGroupNames = as.character((rdeck_layer_group_names[selected_groups]))
+      layerGroupNames = as.character(unname(rdeck_layer_group_names[selected_groups]))
     )
 
   rdeckControls(
