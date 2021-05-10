@@ -62,7 +62,12 @@ renderRdeckControls <- function(expr, env = parent.frame(), quoted = FALSE) {
   htmlwidgets::shinyRenderWidget(expr, rdeckControlsOutput, env, quoted = TRUE)
 }
 
-rdeck_layer_dropdown <- function(rdeck, layer_names, layer_group_names) {
+rdeck_layer_dropdown <- function(
+  rdeck,
+  layer_names,
+  layer_group_names,
+  initial_selection = NULL 
+) {
 
   rdeck_id <-
     rdeck$elementId
@@ -101,10 +106,23 @@ rdeck_layer_dropdown <- function(rdeck, layer_names, layer_group_names) {
       integer(0)
     }
 
+  all_names <- unlist(c(selected_layers, selected_groups)) 
+  if (length(all_names) == 0) {
+    stop("Couldn't match any layer names or group names")
+  }
+
+  if (!is.null(initial_selection)) {
+  stopifnot(initial_selection %in% all_names)
+  } else {
+    initial_selection <- all_names[1]
+  }
+
+
   control_data <-
     list(
       layerNames = as.character(unname(rdeck_layer_names[selected_layers])),
-      layerGroupNames = as.character(unname(rdeck_layer_group_names[selected_groups]))
+      layerGroupNames = as.character(unname(rdeck_layer_group_names[selected_groups])),
+      initialSelection = initial_selection
     )
 
   rdeckControls(
@@ -113,4 +131,3 @@ rdeck_layer_dropdown <- function(rdeck, layer_names, layer_group_names) {
     controlData = control_data
   )
 }
- 
