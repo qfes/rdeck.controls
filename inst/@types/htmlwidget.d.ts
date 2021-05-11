@@ -12,7 +12,7 @@ export interface Binding {
 }
 
 export interface Widget {
-  renderValue(x: rdeckRPayload): void;
+  renderValue(x: RDeckRPayload): void;
   resize(width: number, height: number): void;
 }
 

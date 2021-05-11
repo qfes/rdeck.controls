@@ -10,23 +10,23 @@ HTMLWidgets.widget({
 
     return {
 
-      renderValue: function (x) {
+      renderValue: function (x: RDeckRPayload): void {
 
-        var controlRenderFunction: (arg: rdeckLayerControlProperties) => string;
+        var controlRender: (arg: RDeckLayerControlProperties) => HTMLElement;
 
         switch (x.controlType) {
           case "dropdown":
-            controlRenderFunction = rdeckLayerDropdown;
+            controlRender = rdeckLayerDropdown;
             break;
           default:
             throw(`rdeckControls recieved an unknown control type: {x.controlType}`) 
         };
 
-        el.innerHTML = controlRenderFunction({targetRdeckId: x.targetRdeckId, ...x.controlData})
-
+        const controlEl = controlRender({targetRdeckId: x.targetRdeckId, ...x.controlData})
+        el.appendChild(controlEl);
       },
 
-      resize: function (width, height) {
+      resize: function (width, height): void {
 
         // TODO: code to re-render the widget with a new size
 
@@ -35,3 +35,9 @@ HTMLWidgets.widget({
     };
   }
 });
+
+
+
+let widget: RDeckWidget = { layers: [], setLayerVisibility(layers) { return; } };
+
+widget.setLayerVisibility([{ groupName: null, name: null, visible: true }])
