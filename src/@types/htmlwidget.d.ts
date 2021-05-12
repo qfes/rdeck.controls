@@ -1,3 +1,5 @@
+import {RDeckRPayload} from "./R"
+
 /* exposed global */
 export as namespace HTMLWidgets;
 

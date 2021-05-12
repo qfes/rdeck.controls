@@ -12,7 +12,6 @@ export interface GroupNamedRDeckLayer {
 
 export type RDeckLayer = NamedRDeckLayer | GroupNamedRDeckLayer;
 
-
 export interface RDeckWidget {
   layers: RDeckLayer[],
   setLayerVisibility(layers: RDeckLayer[]): void

@@ -1,10 +1,8 @@
-#' <Add Title>
+#' Generic rdeck control widget 
 #'
-#' <Add Description>
+#' A generic control widget constructor.
 #'
 #' @import htmlwidgets
-#'
-#' @export
 rdeckControls <- function(
   targetRdeckId,
   controlType = "dropdown",
@@ -62,6 +60,18 @@ renderRdeckControls <- function(expr, env = parent.frame(), quoted = FALSE) {
   htmlwidgets::shinyRenderWidget(expr, rdeckControlsOutput, env, quoted = TRUE)
 }
 
+
+#' Dropdown layer selector for rdeck maps
+#'
+#' Create an external layer control for an rdeck map in rmarkdown or shiny.
+#'
+#' @param rdeck DESCRIPTION.
+#' @param layer_names DESCRIPTION.
+#' @param layer_group_names DESCRIPTION.
+#' @param initial_selection DESCRIPTION.
+#'
+#' @return a htmlwidget
+#' @export
 rdeck_layer_dropdown <- function(
   rdeck,
   layer_names,
@@ -116,7 +126,6 @@ rdeck_layer_dropdown <- function(
   } else {
     initial_selection <- all_names[1]
   }
-
 
   control_data <-
     list(

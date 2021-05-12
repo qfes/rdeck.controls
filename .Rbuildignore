@@ -1,1 +1,8 @@
 ^README\.Rmd$
+^README\.html$
+node_modules$
+src$
+^.eslintrc.json
+^package-lock.json
+^package.json
+^tsconfig.json
