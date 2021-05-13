@@ -1,5 +1,5 @@
 export interface RDeckRPayload {
-  targetRdeckId: string;
+  targetRDeckId: string;
   controlType: "dropdown";
   controlData: {
     layerNames: string[];

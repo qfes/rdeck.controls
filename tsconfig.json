@@ -1,10 +1,12 @@
 {
     "compilerOptions": {
-        "target": "ES2015",
-        "module": "system",
-        "lib": ["dom", "ES2015"],
+        "target": "ES2018",
+        "module": "esnext",
+        "lib": ["dom", "dom.iterable", "ES2018"],
+        "strict": true,
         "strictNullChecks": true,
         "allowUmdGlobalAccess": true,
-        "outDir": "inst/htmlwidgets"
+        "esModuleInterop": true,
+        "moduleResolution": "node"
     }
 }

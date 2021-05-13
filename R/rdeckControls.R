@@ -4,7 +4,7 @@
 #'
 #' @import htmlwidgets
 rdeckControls <- function(
-  targetRdeckId,
+  targetRDeckId,
   controlType = "dropdown",
   controlData = NULL,
   width = NULL,
@@ -14,7 +14,7 @@ rdeckControls <- function(
 
   # forward options using x
   x <- list(
-    targetRdeckId = targetRdeckId,
+    targetRDeckId = targetRDeckId,
     controlType = controlType,
     controlData = controlData
   )
@@ -116,7 +116,11 @@ rdeck_layer_dropdown <- function(
       integer(0)
     }
 
-  all_names <- unlist(c(selected_layers, selected_groups)) 
+  all_names <- c(rdeck_layer_names[selected_layers], 
+                 rdeck_layer_group_names[selected_groups]) %>%
+                 unlist() %>%
+                 unname()
+
   if (length(all_names) == 0) {
     stop("Couldn't match any layer names or group names")
   }
@@ -135,7 +139,7 @@ rdeck_layer_dropdown <- function(
     )
 
   rdeckControls(
-    targetRdeckId = rdeck_id,
+    targetRDeckId = rdeck_id,
     controlType = "dropdown",
     controlData = control_data
   )

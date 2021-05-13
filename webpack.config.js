@@ -5,7 +5,7 @@ module.exports = (env, { mode }) => {
 
   return {
     mode,
-    entry: { rdeckControls: "./src" },
+    entry: { rdeckControls: "./src/rdeckControls" },
     output: {
       path: resolve(__dirname, "inst/htmlwidgets"),
       filename: "[name].js",
@@ -13,8 +13,7 @@ module.exports = (env, { mode }) => {
       libraryTarget: "umd",
     },
     resolve: {
-      extensions: [".ts", ".tsx", ".js", "jsx"],
-      mainFields: ["esnext", "browser", "module", "main"],
+      extensions: [".ts", ".js"],
     },
     module: {
       rules: [
@@ -22,7 +21,7 @@ module.exports = (env, { mode }) => {
           test: /\.(ts|js)x?$/,
           exclude: /node_modules/,
           loader: "ts-loader",
-        }
+        },
       ],
     },
     devtool: mode === "development" && "inline-source-map",

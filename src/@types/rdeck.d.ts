@@ -2,6 +2,7 @@ export as namespace rdeck;
 
 export interface NamedRDeckLayer {
   name: string,
+  groupName: null;
   visible: boolean
 }
 
