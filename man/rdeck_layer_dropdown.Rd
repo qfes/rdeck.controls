@@ -8,21 +8,32 @@ rdeck_layer_dropdown(
   rdeck,
   layer_names,
   layer_group_names,
-  initial_selection = NULL
+  initial_selection = NULL,
+  label = "",
+  width = "100\%",
+  height = "1em"
 )
 }
 \arguments{
-\item{rdeck}{DESCRIPTION.}
+\item{rdeck}{the target rdeck instance to create a control for.}
 
-\item{layer_names}{DESCRIPTION.}
+\item{layer_names}{a tidy select expression matching layer names. e.g. starts_with("demand")}
 
-\item{layer_group_names}{DESCRIPTION.}
+\item{layer_group_names}{a tidy select expression matching layer group names. e.g. starts_with("rfs")}
 
-\item{initial_selection}{DESCRIPTION.}
-}
-\value{
-a htmlwidget
+\item{initial_selection}{The layer or layer group that is to be selected by default before the user has interacted with the control. Defaults to the first matched layer name, then layer group name.}
+
+\item{label}{Some text that immediately precedes the dropdown control.}
+
+\item{width}{of the control div as css dimension string.}
+
+\item{height}{of the control div as css dimenson string.}
 }
 \description{
 Create an external layer control for an rdeck map in rmarkdown or shiny.
+}
+\details{
+Match \code{layer_names} and or \code{layer_group_names} by using 'tidy select' syntax see \code{\link[tidyselect:eval_select]{tidyselect::eval_select()}}.
+
+The \code{layer_names} tidyselect can only be used to toggle visibility of ungrouped layers, that is layers with no \code{group_name} set. This is enforced by \code{{rdeck}}.
 }

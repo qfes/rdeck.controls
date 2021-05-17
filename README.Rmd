@@ -1,5 +1,5 @@
 ---
-output: html_document
+output: github_document 
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -10,7 +10,7 @@ knitr::opts_chunk$set(
   comment = "#>",
   fig.path = "man/figures/README-",
   out.width = "100%",
-  eval = TRUE
+  eval = FALSE
 )
 ```
 

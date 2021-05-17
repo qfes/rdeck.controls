@@ -1,16 +1,19 @@
 Package: rdeck.controls
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
+Title: External Interactive Controls for {rdeck} in {rmarkdown}
+Version: 0.0.1
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Miles",
+           family = "McBain",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to
-    pick a license
+           email = "miles.mcbain@qfes.qld.gov.au")
+Description: HTML widgets for external controls for toggling layers for {rdeck} in HTML documents. 
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
+Suggests: 
+    rdeck
+Imports: 
+    purrr,
+    htmlwidgets

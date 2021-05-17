@@ -15,6 +15,7 @@ library(rdeck)
 library(sf)
 library(RcppSimdJson)
 library(viridis)
+library(rdeck.controls)
 
 url <- file.path(
   "https://raw.githubusercontent.com/visgl/deck.gl-data/master",
@@ -94,7 +95,9 @@ manhattan_map <-
 ``` r
 rdeck_layer_dropdown(
   manhattan_map,
-  starts_with("manhattan")
+  starts_with("manhattan"),
+  height = "1em",
+  label = "Select the pet type: "
 )
 ```
 

@@ -5,7 +5,7 @@
 \title{Generic rdeck control widget}
 \usage{
 rdeckControls(
-  targetRdeckId,
+  targetRDeckId,
   controlType = "dropdown",
   controlData = NULL,
   width = NULL,

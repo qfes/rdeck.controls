@@ -6,7 +6,7 @@
 \alias{renderRdeckControls}
 \title{Shiny bindings for rdeckControls}
 \usage{
-rdeckControlsOutput(outputId, width = "100\%", height = "400px")
+rdeckControlsOutput(outputId, width = "100\%", height = "1em")
 
 renderRdeckControls(expr, env = parent.frame(), quoted = FALSE)
 }

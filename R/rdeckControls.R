@@ -64,13 +64,18 @@ renderRdeckControls <- function(expr, env = parent.frame(), quoted = FALSE) {
 #' Dropdown layer selector for rdeck maps
 #'
 #' Create an external layer control for an rdeck map in rmarkdown or shiny.
+#' 
+#' Match `layer_names` and or `layer_group_names` by using 'tidy select' syntax see [tidyselect::eval_select()].
+#' 
+#' The `layer_names` tidyselect can only be used to toggle visibility of ungrouped layers, that is layers with no `group_name` set. This is enforced by `{rdeck}`.
 #'
-#' @param rdeck DESCRIPTION.
-#' @param layer_names DESCRIPTION.
-#' @param layer_group_names DESCRIPTION.
-#' @param initial_selection DESCRIPTION.
-#'
-#' @return a htmlwidget
+#' @param rdeck the target rdeck instance to create a control for.
+#' @param layer_names a tidy select expression matching layer names. e.g. starts_with("demand")
+#' @param layer_group_names a tidy select expression matching layer group names. e.g. starts_with("rfs")
+#' @param initial_selection The layer or layer group that is to be selected by default before the user has interacted with the control. Defaults to the first matched layer name, then layer group name. 
+#' @param label Some text that immediately precedes the dropdown control.
+#' @param width of the control div as css dimension string.
+#' @param height of the control div as css dimenson string.
 #' @export
 rdeck_layer_dropdown <- function(
   rdeck,
