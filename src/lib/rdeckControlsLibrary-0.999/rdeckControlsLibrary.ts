@@ -61,23 +61,20 @@ export function rdeckLayerDropdown({
   selectNode.id = `${targetRDeckId}_layerDropdownControl`;
   selectNode.addEventListener(
     "change",
-    onSelectionChangeFactory(selectNode.id, targetRDeckId)
+    onSelectionChangeFactory(targetRDeckId)
   );
   return selectNode;
 }
 
 // ----- utils
 function onSelectionChangeFactory(
-  controlId: string,
   targetId: string
-): () => void {
-  return () => {
-    const selectElement = document.getElementById(
-      controlId
-    ) as HTMLSelectElement | null;
+): (event: Event) => void {
+  return (event: Event) => {
+    const selectElement = event.currentTarget as HTMLSelectElement | null;
     if (selectElement === null) {
       console.log(
-        `rdeckControls couldn't find the control element by Id: ${controlId}`
+        `rdeckControls couldn't find the control element in onChange callback.`
       );
       throw Error("rdeckcontrols error");
     }
