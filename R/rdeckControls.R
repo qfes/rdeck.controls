@@ -47,7 +47,7 @@ rdeckControls <- function(
 #' @name rdeckControls-shiny
 #'
 #' @export
-rdeckControlsOutput <- function(outputId, width = "100%", height = "400px") {
+rdeckControlsOutput <- function(outputId, width = "100%", height = "1em") {
   htmlwidgets::shinyWidgetOutput(outputId, "rdeckControls", width, height, package = "rdeck.controls")
 }
 
@@ -76,7 +76,10 @@ rdeck_layer_dropdown <- function(
   rdeck,
   layer_names,
   layer_group_names,
-  initial_selection = NULL 
+  initial_selection = NULL,
+  label = "",
+  width = "100%",
+  height = "1em"
 ) {
 
   rdeck_id <-
@@ -135,12 +138,15 @@ rdeck_layer_dropdown <- function(
     list(
       layerNames = as.character(unname(rdeck_layer_names[selected_layers])),
       layerGroupNames = as.character(unname(rdeck_layer_group_names[selected_groups])),
-      initialSelection = initial_selection
+      initialSelection = initial_selection,
+      label = label
     )
 
   rdeckControls(
     targetRDeckId = rdeck_id,
     controlType = "dropdown",
-    controlData = control_data
+    controlData = control_data,
+    width = width,
+    height = height
   )
 }

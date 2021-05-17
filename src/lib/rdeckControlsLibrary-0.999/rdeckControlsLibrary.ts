@@ -6,6 +6,7 @@ export interface RDeckLayerControlProperties {
   layerNames: string[];
   layerGroupNames: string[];
   initialSelection: string | string[];
+  label: string;
 }
 
 export interface LayerOptionElement extends HTMLOptionElement {
@@ -139,10 +140,12 @@ export function isRDeckLayerControlProperties(
     "layerNames" in controlProperties &&
     "layerGroupNames" in controlProperties &&
     "initialSelection" in controlProperties &&
+    "label" in controlProperties &&
     typeof controlProperties.targetRDeckId === "string" &&
     isStringArray(controlProperties.layerNames) &&
     isStringArray(controlProperties.layerGroupNames) &&
     (typeof controlProperties.initialSelection === "string" ||
-      isStringArray(controlProperties.initialSelection))
+      isStringArray(controlProperties.initialSelection)) &&
+    typeof controlProperties.label === "string" 
   );
 }

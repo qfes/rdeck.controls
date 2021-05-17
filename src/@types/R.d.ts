@@ -5,5 +5,6 @@ export interface RDeckRPayload {
     layerNames: string[];
     layerGroupNames: string[];
     initialSelection: string | string[];
+    label: string;
   };
 }

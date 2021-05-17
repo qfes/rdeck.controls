@@ -36,6 +36,7 @@ console.log("Executing rdeckControls.js...")
           throw Error("rdeckcontrols received data from R that does not conform to control properties schema.")
         }
         const controlEl = controlRender(controlProperties);
+        el.innerText = controlProperties.label;
         el.appendChild(controlEl);
         
       },
