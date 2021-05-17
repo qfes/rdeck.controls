@@ -1,6 +1,6 @@
 Package: rdeck.controls
 Title: External Interactive Controls for {rdeck} in {rmarkdown}
-Version: 0.0.1
+Version: 0.1.0
 Authors@R: 
     person(given = "Miles",
            family = "McBain",
