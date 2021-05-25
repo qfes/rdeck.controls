@@ -1,6 +1,6 @@
 Package: rdeck.controls
 Title: External Interactive Controls for {rdeck} in {rmarkdown}
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: 
     person(given = "Miles",
            family = "McBain",
@@ -10,10 +10,18 @@ Description: HTML widgets for external controls for toggling layers for {rdeck} 
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Roxygen: list(markdown = TRUE)
+Roxygen: list(
+    markdown = TRUE,
+    roclets = c("collate", "namespace", "rd", "roxyglobals::global_roclet"))
 RoxygenNote: 7.1.1
-Suggests: 
-    rdeck
 Imports: 
     purrr,
-    htmlwidgets
+    htmlwidgets,
+    rlang,
+    tidyselect,
+    magrittr
+Remotes:
+    anthonynorth/rdeck >= 0.3.0.9320,
+    anthonynorth/roxyglobals
+Suggests: 
+    roxyglobals (>= 0.2.1)

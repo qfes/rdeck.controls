@@ -1,4 +1,4 @@
-#' Generic rdeck control widget 
+#' Generic rdeck control widget
 #'
 #' A generic control widget constructor.
 #'
@@ -64,18 +64,20 @@ renderRdeckControls <- function(expr, env = parent.frame(), quoted = FALSE) {
 #' Dropdown layer selector for rdeck maps
 #'
 #' Create an external layer control for an rdeck map in rmarkdown or shiny.
-#' 
+#'
 #' Match `layer_names` and or `layer_group_names` by using 'tidy select' syntax see [tidyselect::eval_select()].
-#' 
+#'
 #' The `layer_names` tidyselect can only be used to toggle visibility of ungrouped layers, that is layers with no `group_name` set. This is enforced by `{rdeck}`.
 #'
 #' @param rdeck the target rdeck instance to create a control for.
 #' @param layer_names a tidy select expression matching layer names. e.g. starts_with("demand")
 #' @param layer_group_names a tidy select expression matching layer group names. e.g. starts_with("rfs")
-#' @param initial_selection The layer or layer group that is to be selected by default before the user has interacted with the control. Defaults to the first matched layer name, then layer group name. 
+#' @param initial_selection The layer or layer group that is to be selected by default before the user has interacted with the control. Defaults to the first matched layer name, then layer group name.
 #' @param label Some text that immediately precedes the dropdown control.
 #' @param width of the control div as css dimension string.
 #' @param height of the control div as css dimenson string.
+#' @importFrom magrittr %>%
+#' @autoglobal
 #' @export
 rdeck_layer_dropdown <- function(
   rdeck,
@@ -90,17 +92,29 @@ rdeck_layer_dropdown <- function(
   rdeck_id <-
     rdeck$elementId
 
+  if (is.null(rdeck_id)) {
+    rdeck_instance <- deparse1(substitute(rdeck))
+    stop(paste(
+      "The rdeck instance",
+      rdeck_instance,
+      "has elementId == NULL.",
+      "Use the id parameter when creating the map instance to set an id",
+      "that can be referred to by rdeck.controls.",
+      collapse = " "
+    ))
+  }
+
   rdeck_layer_names <-
     rdeck$x$layers %>%
-    purrr::map(pluck, "name") %>%
+    purrr::map(purrr::pluck, "name") %>%
     purrr::keep(~ !is.null(.)) %>%
-    setNames(., .)
+    stats::setNames(., .)
 
   rdeck_layer_group_names <-
     rdeck$x$layers %>%
-    purrr::map(pluck, "group_name") %>%
+    purrr::map(purrr::pluck, "group_name") %>%
     purrr::keep(~ !is.null(.)) %>%
-    setNames(., .)
+    stats::setNames(., .)
 
   selected_layers <-
     if (!is.null(rdeck_layer_names)) {
@@ -124,17 +138,19 @@ rdeck_layer_dropdown <- function(
       integer(0)
     }
 
-  all_names <- c(rdeck_layer_names[selected_layers], 
-                 rdeck_layer_group_names[selected_groups]) %>%
-                 unlist() %>%
-                 unname()
+  all_names <- c(
+    rdeck_layer_names[selected_layers],
+    rdeck_layer_group_names[selected_groups]
+  ) %>%
+    unlist() %>%
+    unname()
 
   if (length(all_names) == 0) {
     stop("Couldn't match any layer names or group names")
   }
 
   if (!is.null(initial_selection)) {
-  stopifnot(initial_selection %in% all_names)
+    stopifnot(initial_selection %in% all_names)
   } else {
     initial_selection <- all_names[1]
   }

@@ -3,7 +3,6 @@
 /* eslint-disable import/prefer-default-export */
 import type { RDeckRPayload } from "./@types/R";
 import * as rdeckControlsLib from "./lib/rdeckControlsLibrary-0.999/rdeckControlsLibrary" 
-console.log("Executing rdeckControls.js...")
 
 
   HTMLWidgets.widget({

@@ -7,3 +7,5 @@ src$
 ^package.json
 ^tsconfig.json
 ^LICENSE\.md$
+.vscode$
+^webpack.config.js$
