@@ -19,9 +19,10 @@ Imports:
     htmlwidgets,
     rlang,
     tidyselect,
-    magrittr
+    magrittr,
+    rdeck (>= 0.3.0.9320)
 Remotes:
-    anthonynorth/rdeck >= 0.3.0.9320,
+    anthonynorth/rdeck,
     anthonynorth/roxyglobals
 Suggests: 
     roxyglobals (>= 0.2.1)
