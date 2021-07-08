@@ -172,7 +172,14 @@ rdeck_layer_dropdown <- function(
   )
 }
 
-## print method allowing !important
+#
+
+#' convert rdeckContols to html allowing !important
+#'
+#' @param x an rdeckControls widget
+#' @param ... other args passed to htmlwidgets:::toHTML
+#'
+#' @return html for the widget 
 #' @export
 as.tags.rdeckControls <- function(x, ...) {
   to_rdeckControls_HTML(x)
@@ -180,7 +187,7 @@ as.tags.rdeckControls <- function(x, ...) {
 
 
 # This function is a simple rewrite of htmlwidgets:::toHTML
-# to remove validaiton of the height and width to allow the use of
+# to remove validation of the height and width to allow the use of
 # !important with CSS units. It is released under MIT license:
 #
 # Copyright 2016 Ramnath Vaidyanathan, Joe Cheng, JJ Allaire, Yihui Xie, and Kenton Russell
@@ -215,7 +222,7 @@ to_rdeckControls_HTML <- function(x, standalone = FALSE, knitrOptions = NULL) {
 
   container <- if (isTRUE(standalone)) {
     function(x) {
-      div(id="htmlwidget_container", x)
+      htmltools::div(id="htmlwidget_container", x)
     }
   } else {
     identity
@@ -239,8 +246,8 @@ to_rdeckControls_HTML <- function(x, standalone = FALSE, knitrOptions = NULL) {
     ),
     htmlwidgets:::widget_data(x, id),
     if (!is.null(sizeInfo$runtime)) {
-      tags$script(type="application/htmlwidget-sizing", `data-for` = id,
-        toJSON(sizeInfo$runtime)
+      htmltools::tags$script(type="application/htmlwidget-sizing", `data-for` = id,
+        htmlwidgets:::toJSON(sizeInfo$runtime)
       )
     }
   )

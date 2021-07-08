@@ -20,7 +20,8 @@ Imports:
     rlang,
     tidyselect,
     magrittr,
-    rdeck (>= 0.3.0.9320)
+    rdeck (>= 0.3.0.9320),
+    htmltools
 Remotes:
     anthonynorth/rdeck,
     anthonynorth/roxyglobals
