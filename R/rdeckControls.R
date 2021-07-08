@@ -171,3 +171,84 @@ rdeck_layer_dropdown <- function(
     height = height
   )
 }
+
+## print method allowing !important
+#' @export
+as.tags.rdeckControls <- function(x, ...) {
+  to_rdeckControls_HTML(x)
+}
+
+
+# This function is a simple rewrite of htmlwidgets:::toHTML
+# to remove validaiton of the height and width to allow the use of
+# !important with CSS units. It is released under MIT license:
+#
+# Copyright 2016 Ramnath Vaidyanathan, Joe Cheng, JJ Allaire, Yihui Xie, and Kenton Russell
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights to
+# use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+# of the Software, and to permit persons to whom the Software is furnished to do
+# so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software
+to_rdeckControls_HTML <- function(x, standalone = FALSE, knitrOptions = NULL) {
+
+  sizeInfo <- htmlwidgets:::resolveSizing(x, x$sizingPolicy, standalone = standalone, knitrOptions = knitrOptions)
+
+  if (!is.null(x$elementId))
+    id <- x$elementId
+  else
+    id <- paste("htmlwidget", htmlwidgets:::createWidgetId(), sep="-")
+
+  w <- sizeInfo$width
+  h <- sizeInfo$height
+
+  # create a style attribute for the width and height
+  style <- paste(
+    "width:", w, ";",
+    "height:", h, ";",
+    sep = "")
+
+  x$id <- id
+
+  container <- if (isTRUE(standalone)) {
+    function(x) {
+      div(id="htmlwidget_container", x)
+    }
+  } else {
+    identity
+  }
+
+  html <- htmltools::tagList(
+    container(
+      htmltools::tagList(
+        x$prepend,
+        htmlwidgets:::widget_html(
+          name = class(x)[1],
+          package = attr(x, "package"),
+          id = id,
+          style = style,
+          class = paste(class(x)[1], "html-widget"),
+          width = sizeInfo$width,
+          height = sizeInfo$height
+        ),
+        x$append
+      )
+    ),
+    htmlwidgets:::widget_data(x, id),
+    if (!is.null(sizeInfo$runtime)) {
+      tags$script(type="application/htmlwidget-sizing", `data-for` = id,
+        toJSON(sizeInfo$runtime)
+      )
+    }
+  )
+  html <- htmltools::attachDependencies(html,
+    c(htmlwidgets:::widget_dependencies(class(x)[1], attr(x, 'package')),
+      x$dependencies)
+  )
+
+  htmltools::browsable(html)
+
+}

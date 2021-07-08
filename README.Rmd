@@ -108,7 +108,7 @@ manhattan_map <-
 rdeck_layer_dropdown(
   manhattan_map,
   starts_with("manhattan"),
-  height = "1em",
+  height = "1em !important",
   label = "Select the pet type: "
 )
 ```
