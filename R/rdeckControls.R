@@ -172,14 +172,13 @@ rdeck_layer_dropdown <- function(
   )
 }
 
-#
-
 #' convert rdeckContols to html allowing !important
 #'
 #' @param x an rdeckControls widget
 #' @param ... other args passed to htmlwidgets:::toHTML
 #'
 #' @return html for the widget 
+#' @method as.tags rdeckControls
 #' @export
 as.tags.rdeckControls <- function(x, ...) {
   to_rdeckControls_HTML(x)

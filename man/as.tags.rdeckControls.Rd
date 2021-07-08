@@ -4,7 +4,7 @@
 \alias{as.tags.rdeckControls}
 \title{convert rdeckContols to html allowing !important}
 \usage{
-as.tags.rdeckControls(x, ...)
+\method{as.tags}{rdeckControls}(x, ...)
 }
 \arguments{
 \item{x}{an rdeckControls widget}
